@@ -1,0 +1,8 @@
+# Python dependencies
+kafka-python==2.0.2
+requests~=2.20
+python-dateutil~=2.7
+click==7.1.2
+
+# Editable install from GitHub
+-e ./external_libs/bitcoin-etl
