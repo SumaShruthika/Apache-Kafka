@@ -33,5 +33,25 @@ services:
     depends_on:
       - kafka
 
+  bitcoin-node:
+    image: ruimarinho/bitcoin-core
+    container_name: bitcoin-node
+    ports:
+      - "8332:8332"   # RPC port
+      - "18332:18332" # Testnet RPC port
+    environment:
+      BITCOIN_NETWORK: testnet
+      BITCOIN_RPCUSER: admin
+      BITCOIN_RPCPASSWORD: strongpassword123
+      BITCOIN_EXTRA_ARGS: |
+        server=1
+        txindex=1
+        rpcallowip=0.0.0.0/0
+
+volumes:
+      - bitcoin-data:/bitcoin
+
 # Downloads Zookeeper and Kafka images, sets up Zookeeper on port 2181, and Kafka on port 9092.
 # Starts both containers with the necessary configurations.
+# Also downloads Kafdrop for Kafka management and a Bitcoin node for blockchain interactions.
+# tells the bitcoin node to use the testnet network with RPC enabled (allows Python scripts to interact with it).
